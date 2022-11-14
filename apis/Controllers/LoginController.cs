@@ -2,8 +2,14 @@
 using apis.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Net.Mail;
+using System.Xml.Linq;
+using Ubiety.Dns.Core.Common;
 
 namespace apis.Controllers
 {
@@ -103,6 +109,37 @@ namespace apis.Controllers
             else
             {
                 return Json(result[1].ToString());
+            }
+        }
+        [HttpGet]
+        public IActionResult VerMail(string email)
+        {
+            var url = $"https://verifier.meetchopra.com/verify/{email}?token=2b1e810090b21cab8a8753ec6bd1f091c66b567b1b893db1209f36999975e99f93bc75c0ab6fa2b35bdfee4b8ac61df6";
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            try
+            {
+                string responseBody = String.Empty;
+                using (WebResponse response = request.GetResponse())
+                {
+                    using (Stream strReader = response.GetResponseStream())
+                    {
+                        if (strReader == null) return BadRequest();
+                        using (StreamReader objReader = new StreamReader(strReader))
+                        {
+                             responseBody = objReader.ReadToEnd();
+                            // Do something with responseBody
+                            Console.WriteLine(responseBody);
+                        }
+                    }
+                }
+                return Ok(new { res = responseBody   });
+            }
+            catch (WebException ex)
+            {
+                return BadRequest(new { error = ex.Message});
             }
         }
     }

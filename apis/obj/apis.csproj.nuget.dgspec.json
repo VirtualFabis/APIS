@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\favia\\source\\repos\\apis\\apis\\apis.csproj": {}
+    "C:\\Users\\Fabis\\Downloads\\gabo\\APIS\\apis\\apis.csproj": {}
   },
   "projects": {
-    "C:\\Users\\favia\\source\\repos\\apis\\apis\\apis.csproj": {
+    "C:\\Users\\Fabis\\Downloads\\gabo\\APIS\\apis\\apis.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\favia\\source\\repos\\apis\\apis\\apis.csproj",
+        "projectUniqueName": "C:\\Users\\Fabis\\Downloads\\gabo\\APIS\\apis\\apis.csproj",
         "projectName": "apis",
-        "projectPath": "C:\\Users\\favia\\source\\repos\\apis\\apis\\apis.csproj",
-        "packagesPath": "C:\\Users\\favia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\favia\\source\\repos\\apis\\apis\\obj\\",
+        "projectPath": "C:\\Users\\Fabis\\Downloads\\gabo\\APIS\\apis\\apis.csproj",
+        "packagesPath": "C:\\Users\\Fabis\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Fabis\\Downloads\\gabo\\APIS\\apis\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\favia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Fabis\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[8.0.29, )"
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"
@@ -63,7 +67,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -75,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

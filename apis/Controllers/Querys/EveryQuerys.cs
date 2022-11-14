@@ -118,7 +118,7 @@ namespace apis.Controllers.Querys
             {
                 List<Task> list = new List<Task>();
 
-                string query = @"SELECT * FROM task WHERE id = @id";
+                string query = @"SELECT id, idTask, title, description, activate FROM task WHERE id = @id";
 
                 MySqlCommand cmd = new MySqlCommand(query);
                 cmd.Parameters.AddWithValue("@id", request.id);
@@ -130,7 +130,7 @@ namespace apis.Controllers.Querys
                     Task s = new Task()
                     {
                         id = Convert.ToInt16(row[0]),
-                        idTask = Convert.ToInt32(row.ItemArray[1]),
+                        idTask = Convert.ToInt16(row[1]),
                         task = row.ItemArray[2].ToString(),
                         desc = row.ItemArray[3].ToString(),
                         activate = Convert.ToBoolean(row[4]),
