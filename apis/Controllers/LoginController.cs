@@ -1,15 +1,13 @@
 ﻿using apis.Controllers.Querys;
 using apis.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Net.Mail;
+using System.Net.Http;
+using System.Text;
 using System.Xml.Linq;
-using Ubiety.Dns.Core.Common;
 
 namespace apis.Controllers
 {
@@ -129,17 +127,177 @@ namespace apis.Controllers
                         if (strReader == null) return BadRequest();
                         using (StreamReader objReader = new StreamReader(strReader))
                         {
-                             responseBody = objReader.ReadToEnd();
+                            responseBody = objReader.ReadToEnd();
                             // Do something with responseBody
                             Console.WriteLine(responseBody);
                         }
                     }
                 }
-                return Ok(new { res = responseBody   });
+                return Ok(new { res = responseBody });
             }
             catch (WebException ex)
             {
-                return BadRequest(new { error = ex.Message});
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+        [HttpGet]
+        public IActionResult test()
+        {
+            var url = $"https://test.evundile.com.mx/api/products/?ws_key=9QMR8FP6SFCICN2RN5U4ZNM16M5HQ4AR&display=full";
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            request.Headers.Add("Output-Format", "JSON");
+
+            try
+            {
+                string responseBody = String.Empty;
+                string json = string.Empty;
+                using (WebResponse response = request.GetResponse())
+                {
+                    using (Stream strReader = response.GetResponseStream())
+                    {
+                        if (strReader == null) return BadRequest();
+                        using (StreamReader objReader = new StreamReader(strReader))
+                        {
+                            responseBody = objReader.ReadToEnd();
+
+                            // Do something with responseBody
+                            Console.WriteLine(responseBody);
+                        }
+                    }
+                }
+                return Ok(new { xd = responseBody });
+            }
+            catch (WebException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+
+        public class pro
+        {
+            public string name { get; set; }
+            public string desc { get; set; }
+            public int price { get; set; }
+
+        }
+        [HttpPost]
+        public async System.Threading.Tasks.Task<ActionResult> Create(pro data)
+        {
+            string wskey = "9QMR8FP6SFCICN2RN5U4ZNM16M5HQ4AR";
+
+            // Datos del producto a insertar
+
+
+            // Crear el objeto HttpClient
+            using (var client = new HttpClient())
+            {
+                // Establecer la URL base de la API
+                client.BaseAddress = new Uri("https://test.evundile.com.mx/api/");
+
+                // Establecer la cabecera de autorización con la wskey
+
+                // Crear el objeto que contiene los datos del producto
+
+                string xmlString = $@"<prestashop>
+                        <product>
+                          <name><language id='1' ><![CDATA[{data.name}]]></language></name>
+                          <description><language id='1'><![CDATA[{data.desc}]]></language></description>
+                          <price><![CDATA[{data.price}]]></price>
+                        </product>
+                      </prestashop>";
+
+                XElement xml = XElement.Parse(xmlString);
+
+
+                // Crear el contenido HTTP con el XML
+                var content = new StringContent(xml.ToString(), Encoding.UTF8, "application/xml");
+
+                // Realizar la petición HTTP POST para insertar el producto
+                var response = await client.PostAsync("products/?ws_key=9QMR8FP6SFCICN2RN5U4ZNM16M5HQ4AR", content);
+
+                // Leer la respuesta HTTP
+                var responseContent = await response.Content.ReadAsStringAsync();
+
+                // Mostrar la respuesta en la consola
+                return Ok(new { res = responseContent });
+            }
+        }
+
+        [HttpGet]
+        public async System.Threading.Tasks.Task<ActionResult> delete(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                // Establecer la URL base de la API
+                client.BaseAddress = new Uri("https://test.evundile.com.mx/api/");
+
+                // Establecer la cabecera de autorización con la wskey
+
+                // Crear el objeto que contiene los datos del producto
+
+                // Realizar la petición HTTP POST para insertar el producto
+                var response = await client.DeleteAsync($"products/{id}?ws_key=9QMR8FP6SFCICN2RN5U4ZNM16M5HQ4AR");
+
+                // Leer la respuesta HTTP
+                var responseContent = await response.Content.ReadAsStringAsync();
+
+                // Mostrar la respuesta en la consola
+                return Ok(new { res = responseContent });
+
+            }
+            }
+        public class pro2
+        {
+            public int id { get; set; } 
+            public string name { get; set; }
+            public string desc { get; set; }
+            public int price { get; set; }
+
+        }
+        [HttpPost]
+        public async System.Threading.Tasks.Task<ActionResult> Update(pro2 product)
+        {
+
+            // Datos del producto a insertar
+
+
+            // Crear el objeto HttpClient
+            using (var client = new HttpClient())
+            {
+                // Establecer la URL base de la API
+                client.BaseAddress = new Uri("https://test.evundile.com.mx/api/");
+
+                // Establecer la cabecera de autorización con la wskey
+
+                // Crear el objeto que contiene los datos del producto
+
+                string xmlString = $@"<prestashop>
+                                <product>
+                                  <id>{product.id}</id>
+                                  <name>{product.name}</name>
+                                  <description>{product.desc}</description>
+                                  <price>{product.price}</price>
+                                  <id_default_image>NONE</id_default_image>
+                                </product>
+                              </prestashop>";
+
+                XElement xml = XElement.Parse(xmlString);
+
+
+                // Crear el contenido HTTP con el XML
+                var content = new StringContent(xml.ToString(), Encoding.UTF8, "application/xml");
+
+                // Realizar la petición HTTP POST para insertar el producto
+                var response = await client.PatchAsync($"products/{product.id}?ws_key=9QMR8FP6SFCICN2RN5U4ZNM16M5HQ4AR", content);
+
+                // Leer la respuesta HTTP
+                var responseContent = await response.Content.ReadAsStringAsync();
+
+                // Mostrar la respuesta en la consola
+                return Ok(new { res = responseContent });
             }
         }
     }

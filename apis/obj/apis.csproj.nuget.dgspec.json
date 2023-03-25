@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Fabis\\Downloads\\gabo\\APIS\\apis\\apis.csproj": {}
+    "C:\\Users\\FABIBAR\\source\\repos\\APIS\\apis\\apis.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Fabis\\Downloads\\gabo\\APIS\\apis\\apis.csproj": {
+    "C:\\Users\\FABIBAR\\source\\repos\\APIS\\apis\\apis.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Fabis\\Downloads\\gabo\\APIS\\apis\\apis.csproj",
+        "projectUniqueName": "C:\\Users\\FABIBAR\\source\\repos\\APIS\\apis\\apis.csproj",
         "projectName": "apis",
-        "projectPath": "C:\\Users\\Fabis\\Downloads\\gabo\\APIS\\apis\\apis.csproj",
-        "packagesPath": "C:\\Users\\Fabis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Fabis\\Downloads\\gabo\\APIS\\apis\\obj\\",
+        "projectPath": "C:\\Users\\FABIBAR\\source\\repos\\APIS\\apis\\apis.csproj",
+        "packagesPath": "C:\\Users\\FABIBAR\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\FABIBAR\\source\\repos\\APIS\\apis\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Fabis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\FABIBAR\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -67,8 +70,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -80,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.310\\RuntimeIdentifierGraph.json"
         }
       }
     }
